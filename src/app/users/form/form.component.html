@@ -1,0 +1,147 @@
+<div class="modal-header">
+  <span mat-dialog-title> {{ id ? 'Modificar':  'Crear' }} usuario </span>
+  <button
+    id="modal-close-button"
+    mat-dialog-close
+    mat-mini-fab
+    type="button"
+    aria-label="Cerrar"
+    color="basic"
+    (click)="clickClosed()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<form mat-dialog-content [formGroup]="form!">
+  <mat-form-field>
+    <mat-label>Cédula</mat-label>
+    <input
+      matInput
+      type="text"
+      name="idDocument"
+      id="idDocument"
+      formControlName="idDocument"
+      required
+    />
+    <mat-error *ngIf="form.controls['idDocument'].hasError('required')"
+      >Campo requerido</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Nombre(s)</mat-label>
+    <input
+      matInput
+      type="text"
+      name="firstName"
+      id="firstName"
+      formControlName="firstName"
+      required
+    />
+    <mat-error
+      *ngIf="form.controls['firstName'].hasError('required')"
+      >Campo requerido</mat-error
+    >
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <mat-label>Apellido(s)</mat-label>
+    <input
+      matInput
+      type="text"
+      name="lastName"
+      id="lastName"
+      formControlName="lastName"
+      required
+    />
+    <mat-error
+      *ngIf="form.controls['lastName'].hasError('required')"
+      >Campo requerido</mat-error
+    >
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Correo Electrónico</mat-label>
+    <input
+      matInput
+      type="email"
+      name="email"
+      id="email"
+      formControlName="email"
+    />
+    <mat-error *ngIf="form.controls['email'].hasError('required')"
+      >Campo requerido</mat-error
+    >
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Fecha de nacimiento</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="birthdate" readonly="true">
+    <!-- <mat-hint>DD/MM/YYYY</mat-hint> -->
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="form.controls['birthdate'].hasError('required')"
+      >Campo requerido</mat-error
+    >
+  </mat-form-field>
+  
+  
+  <mat-form-field>
+    <mat-label>Rol</mat-label>
+    <mat-select
+      name="role"
+      formControlName="role"
+      matSelect
+      placeholder="Rol"
+    >
+      <mat-option
+        *ngFor="let role of roles"
+        [value]="role.value"
+      >
+        {{ role.name }}
+      </mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <mat-label>Estado</mat-label>
+    <mat-select
+      name="status"
+      formControlName="status"
+      matSelect
+      placeholder="Estado"
+    >
+      <mat-option
+        *ngFor="let option of status"
+        [value]="option.value"
+      >
+        {{ option.name }}
+      </mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</form>
+
+<div class="modal-footer" mat-dialog-actions>
+  <button
+    mat-button
+    type="button"
+    (click)="clickSave()"
+    color="primary"
+    [disabled]="submitDisabled || loading"
+  >
+    Guardar
+  </button>
+  <button
+    mat-button
+    mat-dialog-close
+    cdkFocusInitial
+    type="button"
+    (click)="clickClosed()"
+  >
+    Cancelar
+  </button>
+</div>
+<app-state *ngIf="loading" class="app-loading"> </app-state>

@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  mat-form-field {
+    width: 100%;
+  }
+
+
+  .content-exams {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+    max-height: 30vh;
+    overflow-x: hidden;
+  }
+}

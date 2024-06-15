@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 4rem;
+  h1 {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 3rem;
+  }
+  img {
+    margin-top: 2rem;
+    width: min(40rem, 80vw);
+    border-radius: 50%;
+  }
+}

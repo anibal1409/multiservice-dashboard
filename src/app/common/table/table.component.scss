@@ -1,0 +1,27 @@
+.mat-cell {
+  max-width: 20rem;
+}
+table{
+  width: 100%;
+}
+
+.mat-cell-empty {
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.4rem;
+  font-weight: 100;
+}
+.row-option {
+  cursor: pointer;
+}
+:host ::ng-deep .mat-mdc-paginator-container {
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+.data-cell:has(button) {
+  display: flex;
+  justify-content: center;
+}
+.mat-elevation-z8{
+  overflow: auto;
+}

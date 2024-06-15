@@ -1,0 +1,66 @@
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-nombre',
+  templateUrl: './nombre.component.html',
+  styleUrls: ['./nombre.component.css']
+})
+export class NombreComponent implements OnInit {
+  form: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      // Tus otros campos aquí...
+      studyExams: this.formBuilder.array([]),
+    });
+  }
+
+  get studyExamsArray() {
+    return this.form.get('studyExams') as FormArray;
+  }
+
+  addExam() {
+    this.studyExamsArray.push(this.formBuilder.group({
+      id: [null],
+      name: ['', Validators.required],
+      value: ['']
+    }));
+  }
+
+  removeExam(index: number) {
+    this.studyExamsArray.removeAt(index);
+  }
+}
+
+
+
+
+
+<form [formGroup]="form">
+  <!-- Tus otros campos aquí... -->
+
+  <div formArrayName="studyExams">
+    <div *ngFor="let exam of studyExamsArray.controls; let i=index" [formGroupName]="i">
+      <input type="hidden" formControlName="id"> <!-- Aquí ocultas el campo id -->
+      <label>Nombre del examen:</label>
+      <input formControlName="name" type="text">
+      <label>Valor:</label>
+      <input formControlName="value" type="text">
+
+      <button type="button" (click)="removeExam(i)">Eliminar Examen</button>
+    </div>
+  </div>
+
+  <button type="button" (click)="addExam()">Agregar Examen</button>
+</form>

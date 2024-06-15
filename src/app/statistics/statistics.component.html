@@ -1,0 +1,104 @@
+
+<div class="content-cards d-flex align-items-center justify-content-start">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Estudios realizados en el mes</mat-card-title>
+      <mat-card-subtitle>
+        {{
+          statistics.studies
+        }}
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Exámenes ofrecidos</mat-card-title>
+      <mat-card-subtitle>
+        {{
+          statistics.exams
+        }}
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Pacientes registrados</mat-card-title>
+      <mat-card-subtitle>
+        {{
+          statistics.patients
+        }}
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Usuarios registrados</mat-card-title>
+      <mat-card-subtitle>
+        {{
+          statistics.users
+        }}
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+</div>
+
+<mat-form-field>
+  <mat-label>Mes</mat-label>
+  <mat-select [formControl]="ctrlMonth">
+    <mat-option *ngFor="let month of months" [value]="month.value">{{month.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div class="content-cards d-flex align-items-center justify-content-start">
+  <mat-card class="content-statistics">
+    <mat-card-header>
+      <mat-card-title>Servicios prestados por género</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ngx-charts-pie-grid
+        [results]="genders"
+        [view]="[0, 400]"
+      ></ngx-charts-pie-grid>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card class="content-statistics">
+    <mat-card-header>
+      <mat-card-title>Tipos de servicios prestados</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ngx-charts-pie-chart
+        [results]="typesExam"
+        [labels]="true"
+        [view]="[0, 400]"
+      ></ngx-charts-pie-chart>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card class="content-statistics">
+    <mat-card-header>
+      <mat-card-title>Servicios prestados</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ngx-charts-bar-vertical
+        [results]="exams"
+        [xAxisLabel]="'Tipo de exámen'"
+        [yAxisLabel]="''"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [view]="[0, 400]"
+      ></ngx-charts-bar-vertical>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+
+
