@@ -360,3 +360,21 @@ app-card-subject-schedules.danger > mat-card {
 .hidden {
   display: none;
 }
+
+.app-page {
+  --height-header: 6rem;
+  --height: calc(100vh - var(--height-header));
+  height: var(--height);
+  max-height: var(--height);
+  display: flex;
+  flex-direction: column;
+}
+
+.container-empty {
+  font-size: 2.5rem;
+  color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem;
+}

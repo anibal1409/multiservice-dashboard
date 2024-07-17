@@ -38,6 +38,12 @@ export class CreateStudyService
           amount: +x.amount,
           subtotal: +x.subtotal
         })) as any,
+        saleServices: entitySave.saleServices.map((x) => ({
+          service: { id: x.serviceId },
+          price: +x.price,
+          amount: +x.amount,
+          subtotal: +x.subtotal
+        })) as any,
       }
       )
       .pipe(

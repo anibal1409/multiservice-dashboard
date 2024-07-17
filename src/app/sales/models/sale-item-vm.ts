@@ -6,6 +6,7 @@ export interface SaleItemVM extends SaleVM {
   statusText?: string;
   customerName?: string;
   counterProducts?: number;
+  counterServices?: number;
   stageText?: string;
   options?: { 
     options?: Array<RowOptionVM<RowActionSale>>; 

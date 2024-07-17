@@ -25,8 +25,10 @@ import {
   CustomCurrencyMaskConfig,
 } from '../../common/currency-mask/mask-config';
 import { ProductItemVM } from '../../products';
+import { ServiceItemVM } from '../../services';
 import {
   SaleProduct,
+  SaleService,
   SaleVM,
 } from '../models';
 import {
@@ -56,6 +58,7 @@ export class FormComponent implements OnInit, OnDestroy {
     customerId: 0,
     stage: StageSale.Pending,
     saleProducts: [],
+    saleServices: [], 
     total: 0,
     note: '',
   };
@@ -83,6 +86,10 @@ export class FormComponent implements OnInit, OnDestroy {
   productsBase: Array<ProductItemVM> = [];
   products: Array<ProductItemVM> = [];
   ctrlProduct = new FormControl();
+
+  servicesBase: Array<ServiceItemVM> = [];
+  services: Array<ServiceItemVM> = [];
+  ctrlService = new FormControl();
 
   formDisabled = false;
   subArray$ = new Subscription();
@@ -118,7 +125,7 @@ export class FormComponent implements OnInit, OnDestroy {
         this.loading = loading;
       })
     );
-    this.getProducts();
+    this.getItems();
     this.createForm();
     this.loadData();
   }
@@ -141,13 +148,25 @@ export class FormComponent implements OnInit, OnDestroy {
                 id: entity.id,
 
                 total: entity.total,
-                saleProducts: entity.saleProducts.map(
+                saleProducts: entity?.saleProducts?.map(
                   (saleProduct) => {
                     return {
                       id: saleProduct.id,
                       productId: saleProduct.product?.id,
                       amount: saleProduct.amount,
                       name: saleProduct.product?.name,
+                      price: saleProduct.price,
+                      subtotal: saleProduct.subtotal,
+                    };
+                  }
+                ),
+                saleServices: entity?.saleServices?.map(
+                  (saleProduct) => {
+                    return {
+                      id: saleProduct.id,
+                      serviceId: saleProduct.service?.id,
+                      amount: saleProduct.amount,
+                      name: saleProduct.service?.name,
                       price: saleProduct.price,
                       subtotal: saleProduct.subtotal,
                     };
@@ -167,7 +186,10 @@ export class FormComponent implements OnInit, OnDestroy {
               for (const saleProduct of entity.saleProducts) {
                 this.addProduct(saleProduct);
               }
-              this.updateProductValue();
+              for (const saleService of entity.saleServices) {
+                this.addService(saleService);
+              }
+              this.updateValues();
             }
           })
       );
@@ -189,7 +211,8 @@ export class FormComponent implements OnInit, OnDestroy {
       id: [0],
 
       total: [{ value: 0, disabled: true }, [Validators.required]],
-      saleProducts: this.formBuilder.array([], [Validators.required]),
+      saleProducts: this.formBuilder.array([]),
+      saleServices: this.formBuilder.array([]),
     });
 
     this.sub$.add(
@@ -204,23 +227,26 @@ export class FormComponent implements OnInit, OnDestroy {
     this.sub$.add(
       this.form.get('stage')?.valueChanges.subscribe(
         () => {
-          this.updateProductValue();
+          this.updateValues();
         }
       )
     );
   }
 
-  private updateProductValue(): void {
+  private updateValues(): void {
     const stage = this.form.get('stage')?.value;
     this.hiddenFooter = this.shoHiddenAccept.includes(stage) && !this.submitDisabled;
     this.showDelete = this.showValuesAccept.includes(stage);
     const disabled = !this.showValuesAccept.includes(stage);
-    const formArray = this.saleProductsArray;
-    for (let i = 0; i < formArray.length; i++) {
+    const formArrayProducts = this.saleProductsArray;
+    const formArrayServicess = this.saleServicesArray;
+    for (let i = 0; i < formArrayProducts.length; i++) {
       if (disabled) {
-        formArray.at(i).get('amount')?.disable();
+        formArrayProducts.at(i).get('amount')?.disable();
+        formArrayServicess.at(i).get('amount')?.disable();
       } else {
-        formArray.at(i).get('amount')?.enable();
+        formArrayProducts.at(i).get('amount')?.disable();
+        formArrayServicess.at(i).get('amount')?.disable();
       }
     }
     if (!this.showValuesAccept.includes(stage) || (this.showValuesPrint.includes(stage) && this.submitDisabled)) {
@@ -238,6 +264,10 @@ export class FormComponent implements OnInit, OnDestroy {
 
   get saleProductsArray() {
     return this.form.get('saleProducts') as FormArray;
+  }
+
+  get saleServicesArray() {
+    return this.form.get('saleServices') as FormArray;
   }
 
   addProduct(saleProduct?: SaleProduct) {
@@ -277,14 +307,62 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
 
-  removeExam(index: number) {
+  addService(saleService?: SaleService) {
+    if (this.ctrlService.valid || saleService) {
+      const service: ServiceItemVM = this.ctrlService.value;
+      if (service || saleService) {
+        this.saleServicesArray.push(this.formBuilder.group({
+          id: [null || saleService?.id],
+          serviceId: [service?.id || saleService?.service?.id, Validators.required],
+          name: [{ value: service?.name || saleService?.service?.name, disabled: true }, Validators.required],
+          amount: [saleService?.amount || 1, [Validators.required, Validators.min(0.01)]],
+          price: [{ value: service?.price || saleService?.price, disabled: true }],
+          subtotal: [{ value: saleService?.subtotal || service?.price * 1 , disabled: true }],
+        }));
+
+        this.subArray$.unsubscribe();
+        this.saleServicesArray.controls.forEach(
+          (control) => {
+            this.subArray$.add(
+              () => {
+                const form = (control as FormGroup);
+                form.controls['amount']?.valueChanges.subscribe(
+                  (amount) => {
+                    form.patchValue({
+                      subtotal: form.controls['price'].value * amount,
+                    }, { emitEvent: false });
+                    this.updateTotal();
+                  }
+                )
+              }
+            );
+          }
+        );
+        this.ctrlService.reset();
+        this.updateServices();
+      }
+    }
+  }
+
+  removeProduct(index: number) {
     this.saleProductsArray.removeAt(index);
     this.updateProducts();
   }
 
+  removeService(index: number) {
+    this.saleServicesArray.removeAt(index);
+    this.updateServices();
+  }
+
   private updateProducts(): void {
-    const productIds = this.saleProductsArray.value.map((x: any) => x.productId);
+    const productIds = this.saleProductsArray.value.map((x: SaleProduct) => x.productId);
     this.products = this.productsBase.filter((x) => !productIds.includes(x.id));
+    this.updateTotal();
+  }
+
+  private updateServices(): void {
+    const serviceIds = this.saleServicesArray.value.map((x: SaleService) => x.serviceId);
+    this.services = this.servicesBase.filter((x) => !serviceIds.includes(x.id));
     this.updateTotal();
   }
 
@@ -364,7 +442,7 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getProducts(): void {
+  private getItems(): void {
     this.sub$.add(
       this.entityService.getProducts$().subscribe(
         (products) => {
@@ -374,16 +452,30 @@ export class FormComponent implements OnInit, OnDestroy {
         }
       )
     );
+    this.sub$.add(
+      this.entityService.getServices$().subscribe(
+        (services) => {
+          this.services = services;
+          this.servicesBase = services;
+          this.updateProducts();
+        }
+      )
+    );
   }
 
   private updateTotal(): void {
-    const total: number = this.saleProductsArray
+    const total1: number = this.saleProductsArray
+      .getRawValue()
+      .reduce(
+        (accumulator: number, currentValue: SaleProduct) => accumulator + +currentValue.subtotal, 0,
+      );
+    const total2: number = this.saleServicesArray
       .getRawValue()
       .reduce(
         (accumulator: number, currentValue: SaleProduct) => accumulator + +currentValue.subtotal, 0,
       );
     this.form.patchValue({
-      total: total.toString(),
+      total: total1 + total2,
     });
   }
 

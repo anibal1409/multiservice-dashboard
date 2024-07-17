@@ -9,6 +9,8 @@ import { ListComponentService } from '../common/memory-repository';
 import { FindPatientByDocumentService } from '../customers/use-cases';
 import { ProductItemVM } from '../products';
 import { GetExamsService } from '../products/use-cases/get-exams';
+import { ServiceItemVM } from '../services';
+import { GetServicesService } from '../services/use-cases';
 import { SaleMemoryService } from './memory';
 import {
   SaleBaseQuery,
@@ -34,9 +36,10 @@ export class SalesService extends ListComponentService<SaleItemVM, SaleBaseQuery
     public findEntityService: FindStudyService,
     public updateEntityService: UpdateStudyService,
     private findPatientByDocumentService: FindPatientByDocumentService,
-    private getExamsService: GetExamsService,
+    private getProductsService: GetExamsService,
     private reportSaleService: ReportSaleService,
     private reportSalesService: ReportSalesService,
+    private getServicesService: GetServicesService,
   ) {
     super(
       getEntityService,
@@ -58,7 +61,11 @@ export class SalesService extends ListComponentService<SaleItemVM, SaleBaseQuery
   }
 
   getProducts$(): Observable<Array<ProductItemVM>> {
-    return this.getExamsService.exec();
+    return this.getProductsService.exec();
+  }
+
+  getServices$(): Observable<Array<ServiceItemVM>> {
+    return this.getServicesService.exec();
   }
 
   generateReportSale(data: SaleBaseQuery): Observable<any> {

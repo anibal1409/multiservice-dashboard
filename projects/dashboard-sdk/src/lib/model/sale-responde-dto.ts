@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { CreateSaleServiceDto } from './create-sale-service-dto';
 import { CreateSaleProductDto } from './create-sale-product-dto';
 
 
@@ -20,5 +21,6 @@ export interface SaleRespondeDto {
     total: number;
     customer: object;
     saleProducts: Array<CreateSaleProductDto>;
+    saleServices: Array<CreateSaleServiceDto>;
 }
 

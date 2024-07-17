@@ -26,6 +26,7 @@ import {
 } from '../common';
 import { CustomersModule } from '../customers';
 import { ProductsModule } from '../products';
+import { ServicesModule } from '../services';
 import { FormComponent } from './form/form.component';
 import { SaleMemoryService } from './memory';
 import { ReportComponent } from './report/report.component';
@@ -70,6 +71,7 @@ import {
     ProductsModule,
     CurrencyMaskModule,
     SafeModule,
+    ServicesModule,
   ],
   providers: [
     SalesService,

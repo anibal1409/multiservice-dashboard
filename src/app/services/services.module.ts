@@ -30,7 +30,7 @@ import {
   CreateExamService,
   DeleteExamService,
   FindExamService,
-  GetExamsService,
+  GetServicesService,
   UpdateExamService,
 } from './use-cases';
 
@@ -62,7 +62,7 @@ import {
     CreateExamService,
     DeleteExamService,
     FindExamService,
-    GetExamsService,
+    GetServicesService,
     UpdateExamService,
     GetTypesExamService,
     CurrencyPipe,

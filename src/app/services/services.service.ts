@@ -11,14 +11,14 @@ import {
   CreateExamService,
   DeleteExamService,
   FindExamService,
-  GetExamsService,
+  GetServicesService,
   UpdateExamService,
 } from './use-cases';
 
 @Injectable()
 export class ServicesService extends ListComponentService<ServiceItemVM> {
   constructor(
-    public getEntityService: GetExamsService,
+    public getEntityService: GetServicesService,
     public entityMemoryService: ServiceMemoryService,
     public createEntityService: CreateExamService,
     public deleteEntityService: DeleteExamService,

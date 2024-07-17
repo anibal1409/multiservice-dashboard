@@ -4,6 +4,7 @@ import {
   SALE_NOT_EDIT,
   SaleItemVM,
   SaleProduct,
+  SaleService,
   SaleVM,
 } from '../models';
 import {
@@ -13,13 +14,14 @@ import {
 import { sale2SaleVM } from './sale-2-sale-vm';
 
 export function sale2SaleItemVM(sale: any): SaleItemVM {
-  const studyVM: SaleVM = sale2SaleVM(sale);
+  const saleVM: SaleVM = sale2SaleVM(sale);
   const customer = customerToCustomerItemVM(sale?.customer);
   return { 
-    ...studyVM,
+    ...saleVM,
     customer: customer,
     customerName: customer?.name,
-    counterProducts: studyVM?.saleProducts?.reduce((accumulator: number, currentValue: SaleProduct) => accumulator + +currentValue.amount, 0,) || 0,
+    counterProducts: saleVM?.saleProducts?.reduce((accumulator: number, currentValue: SaleProduct) => accumulator + +currentValue.amount, 0,) || 0,
+    counterServices: saleVM?.saleServices?.reduce((accumulator: number, currentValue: SaleService) => accumulator + +currentValue.amount, 0,) || 0,
     stageText: STAGE_STUDY_VALUE[sale?.stage]?.name,
     statusText: sale?.status ? 'Activo' : 'Inactivo',
     options: { 

@@ -16,7 +16,7 @@ import { ServiceMemoryService } from '../../memory';
 import { ServiceItemVM } from '../../models';
 
 @Injectable()
-export class GetExamsService implements UseCase<Array<ServiceItemVM> | null, BaseQuery> {
+export class GetServicesService implements UseCase<Array<ServiceItemVM> | null, BaseQuery> {
 
   constructor(
     private httpService: ServicesService,

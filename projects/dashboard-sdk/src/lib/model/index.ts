@@ -10,6 +10,7 @@ export * from './create-order-product-dto';
 export * from './create-product-dto';
 export * from './create-sale-dto';
 export * from './create-sale-product-dto';
+export * from './create-sale-service-dto';
 export * from './create-service-dto';
 export * from './create-user-dto';
 export * from './customer-responde-dto';
