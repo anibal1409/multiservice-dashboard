@@ -5,24 +5,8 @@ import {
 
 export function month2MonthStaticti(month: any): MonthStatistics {
   return {
-    gender: [
-      {
-        name: 'Femenino',
-        value: month.gender.female,
-        extra: {
-          code: 'F'
-        },
-      },
-      {
-        name: 'Masculino',
-        value: month.gender.male,
-        extra: {
-          code: 'M'
-        },
-      },
-    ],
-    exams: month.exams.map((exam: any) => toCharVM(exam.examName, exam.count, exam.examName.substr(0, 2))),
-    typesExam: month.typesExam.map((typeExam: any) => toCharVM(typeExam.examType, typeExam.count, typeExam.examType.substr(0, 2))),
+    products: month.products.map((product: any) => toCharVM(product.productName, product.count, product.productName.substr(0, 2))),
+    categories: month.categories.map((category: any) => toCharVM(category.category, category.count, category.category.substr(0, 2))),
   };
 }
 

@@ -14,6 +14,7 @@ import {
   UserStateService,
   UserStateVM,
 } from '../common';
+import { ProfileService } from '../profile';
 import { UserRole } from '../users';
 import { DashboardService } from './dashboard.service';
 import { MENU } from './data';
@@ -31,20 +32,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   pages = [
     {
-      path: '/dashboard/exam-types',
-      title: 'Tipos de examen',
+      path: '/dashboard/categories',
+      title: 'Categorías',
     },
     {
-      path: '/dashboard/exams',
-      title: 'Examenes',
+      path: '/dashboard/products',
+      title: 'Productos',
     },
     {
-      path: '/dashboard/studies',
-      title: 'Estudios',
+      path: '/dashboard/sales',
+      title: 'Ventas',
     },
     {
-      path: '/dashboard/patients',
-      title: 'Pacientes',
+      path: '/dashboard/customers',
+      title: 'Clientes',
     },
     {
       path: '/dashboard/statistics',
@@ -55,23 +56,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
       title: 'Usuarios',
     },
     {
+      path: '/dashboard/orders',
+      title: 'Pedidos',
+    },
+    {
       path: '/dashboard/profile',
       title: 'Mi Perfil',
     },
     {
-      path: 'dashboard/studies/form',
-      title: 'Formulario de estudio',
+      path: '/dashboard/sales/form',
+      title: 'Formulario de venta',
+    },
+    {
+      path: '/dashboard/orders/form',
+      title: 'Formulario de pedido',
     }
   ];
 
   sub$ = new Subscription();
   user: UserStateVM = {
     email: 'user@user.com',
-    firstName: 'User',
-    lastName: 'User',
+    firstName: 'Administrador',
+    lastName: 'del sistema',
     id: 0,
     idDocument: '0',
-    name: 'User',
+    name: '',
     role: UserRole.Super,
     loginStamp: 0,
     roleText: 'Super',
@@ -88,6 +97,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private router: Router,
     private userStateService: UserStateService,
     private dashboardService: DashboardService,
+    private profileService: ProfileService,
   ) { }
 
   ngOnDestroy(): void {
@@ -103,7 +113,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       })
     );
-    // this.user = this.userStateService.getUser() as any;
+    this.user = this.userStateService.getUser() as any;
     console.log(this.user);
     this.sub$.add(
       this.userStateService.getUser$().subscribe((user) => {
@@ -116,8 +126,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       )
     );
     const role = this.userStateService.getRole();
-    if (role || true) {
-      this.optionList = MENU.filter((item) => (item.permissions.includes(role as any) || true))
+    if (role) {
+      this.optionList = MENU.filter((item) => (item.permissions.includes(role as any)))
       .sort((a, b) => {
         let sort = 0;
         if (a.name > b.name) {
@@ -166,5 +176,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   logout(): void {
     this.dashboardService.logout();
+  }
+
+  showProfile(): void{
+    this.profileService.showProfileModal();
+  }
+
+
+  showChangePassword(): void{
+    this.profileService.showChangePasswordModal();
   }
 }

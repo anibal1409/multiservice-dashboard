@@ -6,6 +6,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import {
+  ProfileModule,
+  ProfileService,
+} from '../profile';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardService } from './dashboard.service';
@@ -24,9 +28,11 @@ import { HomeComponent } from './home';
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
+    ProfileModule,
   ],
   providers: [
     DashboardService,
+    ProfileService,
   ]
 })
 export class DashboardModule { }

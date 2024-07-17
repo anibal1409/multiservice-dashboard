@@ -1,0 +1,45 @@
+<div class="row p-3">
+  <div class="col-12 d-flex">
+    <div>
+      <button mat-button type="button" class="mr-3" color="primary" (click)="back()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+    </div>
+    <h2 class="">Reporte de Ventas</h2>
+  </div>
+</div>
+
+<div class="row" [formGroup]="form!">
+  <div class="col-sm-12 col-md-6">
+    <mat-form-field>
+      <mat-label>Rango de Fecha</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date" readonly [max]="maxDate">
+        <input matEndDate formControlName="end" placeholder="End date" readonly>
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+  </div>
+  <div class="col-sm-12 col-md-4">
+    <mat-form-field>
+      <mat-label>Estado</mat-label>
+      <mat-select matSelect formControlName="stage" placeholder="Estado">
+        <mat-option *ngFor="let stage of stagesStudy" [value]="stage.value">
+          {{ stage.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['stage'].hasError('required')">Campo requerido</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-sm-12 col-md-2 d-flex justify-content-end align-items-center">
+
+    <button mat-raised-button type="button" class="mr-2" color="primary" (click)="generate()"
+      [disabled]="submitDisabled">
+      Generar
+    </button>
+  </div>
+</div>
+<div class="w-100 h-100 container-pdf">
+  <iframe *ngIf="pdfSrc" [src]="pdfSrc | safe"></iframe>
+</div>

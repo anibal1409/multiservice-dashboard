@@ -13,7 +13,6 @@ import {
 } from '../../../common/memory-repository';
 import { User2UserItemVM } from '../../mappers';
 import { UserMemoryService } from '../../memory';
-import { UserRole } from '../../model/roles';
 import { UserItemVM } from '../../model/user-item-vm';
 
 @Injectable()
@@ -29,7 +28,6 @@ export class GetUsersService
     return this.entityServices.usersControllerFindAll()
       .pipe(
         map((entities: any) => entities.map(User2UserItemVM)),
-        map((entities: Array<UserItemVM>) => entities.filter((u) => ![UserRole.Super, UserRole.Patient].includes(u.role))),
         tap((entity) => {
           this.memoryService.setDataSource(entity);
         })

@@ -1,0 +1,35 @@
+<div class="mat-container">
+  <mat-card>
+    <mat-card-header>
+    </mat-card-header>
+    <mat-card-content>
+      <app-table
+        emptyMessage="No hay registros para mostrar"
+        emptySearchMessage="Ningún registro coincide con la busqueda"
+        (clickOption)="clickAction($event)"
+      >
+        <div *ngIf="showReport" filters>
+          <button
+            mat-raised-button
+            type="button"
+            (click)="goReport()"
+            color="primary"
+          >
+            Reporte
+          </button>
+        </div>
+      </app-table>
+    </mat-card-content>
+  </mat-card>
+  <button
+    mat-fab
+    matTooltip="Agregar nueva venta"
+    color="primary"
+    aria-label="Agregar nueva venta"
+    class="btn-fixed"
+    [routerLink]="'form'"
+    [disabled]="loading"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

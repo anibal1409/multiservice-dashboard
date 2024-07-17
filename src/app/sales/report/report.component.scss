@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  mat-form-field {
+    width: 100%;
+  }
+  .container-pdf {
+    iframe {
+      height: 100%;
+      max-height: 100%;
+      width: 100%;
+    }
+  }
+}

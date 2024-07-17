@@ -105,4 +105,8 @@ export class TableComponent implements AfterViewInit, OnInit {
   rowAction(option: RowOptionVM<any>, row: { [key: string]: string }) {
     this.clickOption.emit({ option: option, data: row });
   }
+  print(data: any) {
+    console.log(data);
+    
+  }
 }

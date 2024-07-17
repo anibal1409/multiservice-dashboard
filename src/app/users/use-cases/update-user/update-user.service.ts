@@ -36,7 +36,6 @@ export class UpdateUserService
           idDocument: entitySave.idDocument,
           role: entitySave.role,
           status: entitySave.status,
-          patient: {id: entitySave.patientId},
         }
         )
       .pipe(

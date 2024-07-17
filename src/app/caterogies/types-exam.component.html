@@ -1,0 +1,22 @@
+<div class="mat-container">
+  <mat-card>
+    <mat-card-header>
+    </mat-card-header>
+    <mat-card-content>
+      <app-table
+        emptyMessage="No hay registros para mostrar"
+        (clickOption)="clickAction($event)"
+      ></app-table>
+    </mat-card-content>
+  </mat-card>
+  <button
+    mat-fab
+    matTooltip="Agregar categoría"
+    color="primary"
+    aria-label="Agregar categoría"
+    class="btn-fixed"
+    (click)="showModal()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

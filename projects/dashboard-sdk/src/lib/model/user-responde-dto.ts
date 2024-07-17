@@ -1,6 +1,6 @@
 /**
- * Laboratory
- * The Laboratory-API description
+ * MI PROFE
+ * The MI PROFE-API description
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -19,7 +19,6 @@ export interface UserRespondeDto {
     role: string;
     idDocument: string;
     status: boolean;
-    patient: object;
     birthdate: string;
 }
 

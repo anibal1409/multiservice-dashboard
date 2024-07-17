@@ -17,12 +17,12 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'exams',
-        loadChildren: () => import('../exams/exams.module').then(m => m.ExamsModule),
+        path: 'products',
+        loadChildren: () => import('../products/exams.module').then(m => m.ProductsModule),
       },
       {
-        path: 'patients',
-        loadChildren: () => import('../patients/patients.module').then(m => m.PatientsModule),
+        path: 'customers',
+        loadChildren: () => import('../customers/patients.module').then(m => m.CustomersModule),
       },
       {
         path: 'statistics',
@@ -33,17 +33,17 @@ const routes: Routes = [
         loadChildren: () => import('../users/users.module').then(m => m.UsersModule),
       },
       {
-        path: 'exam-types',
-        loadChildren: () => import('../types-exam/types-exam.module').then(m => m.TypesExamModule),
+        path: 'categories',
+        loadChildren: () => import('../caterogies/types-exam.module').then(m => m.CategoriesModule),
       },
       {
-        path: 'studies',
-        loadChildren: () => import('../studies/studies.module').then(m => m.StudiesModule),
+        path: 'sales',
+        loadChildren: () => import('../sales/sales.module').then(m => m.SalesModule),
       },
       {
-        path: 'profile',
-        loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule),
-      }
+        path: 'orders',
+        loadChildren: () => import('../orders/orders.module').then(m => m.OrdersModule),
+      },
     ],
   },
 ];

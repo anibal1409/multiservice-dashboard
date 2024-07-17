@@ -1,6 +1,7 @@
 import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 import {
+  ErrorHandler,
   forwardRef,
   LOCALE_ID,
   NgModule,
@@ -14,8 +15,17 @@ import {
   ApiModule,
   Configuration,
 } from 'dashboard-sdk';
-import { ErrorHandlerModule } from 'error-handler';
+import {
+  ErrorHandlerModule,
+  ErrorHandlerService,
+} from 'error-handler';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import {
+  IConfig,
+  NgxMaskDirective,
+  NgxMaskPipe,
+  provideEnvironmentNgxMask,
+} from 'ngx-mask';
 import {
   ToastModule,
   ToastService,
@@ -43,9 +53,13 @@ function apiConfigFactory(): Configuration {
   });
 }
 
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,12 +86,19 @@ function apiConfigFactory(): Configuration {
     }),
     NgbModule,
     CurrencyMaskModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
   ],
   providers: [
     AuthGuard,
     AuthLoginGuard,
     { provide: LOCALE_ID, useValue: 'es-ES' },
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    provideEnvironmentNgxMask(maskConfig),
+    {
+      provide: ErrorHandler,
+      useExisting: forwardRef(() => ErrorHandlerService),
+    },
   ],
   bootstrap: [AppComponent]
 })

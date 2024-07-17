@@ -1,6 +1,7 @@
 export interface StatisticsCountersVM {
-  patients: number;
+  customers: number;
   users: number;
-  studies: number;
-  exams: number;
+  sales: number;
+  products: number;
+  orders: number;
 }

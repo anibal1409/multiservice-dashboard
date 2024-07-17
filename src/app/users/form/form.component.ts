@@ -57,7 +57,7 @@ export class FormComponent implements OnInit, OnDestroy {
     { name: 'Inactivo', value: false, },
   ];
 
-  roles = USER_ROLES.filter((u) => ![UserRole.Super, UserRole.Patient].includes(u.value)).sort((a, b) => a.name.localeCompare(b.name));
+  roles = USER_ROLES.filter((u) => ![UserRole.Super].includes(u.value)).sort((a, b) => a.name.localeCompare(b.name));
   showSelects = false;
   showSchools = false;
   role!: UserRole;

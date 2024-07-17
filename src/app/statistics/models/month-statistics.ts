@@ -1,7 +1,6 @@
 export interface MonthStatistics {
-  gender: Array<CharVM>;
-  typesExam: Array<CharVM>;
-  exams: Array<CharVM>;
+  categories: Array<CharVM>;
+  products: Array<CharVM>;
 }
 
 export interface GenderMonth {
@@ -9,7 +8,7 @@ export interface GenderMonth {
   female: number;
 }
 
-export interface ExamStatistic {
+export interface ProductStatistic {
   name: string;
   count: number;
 }

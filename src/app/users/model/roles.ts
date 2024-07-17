@@ -1,10 +1,9 @@
+
 export enum UserRole {
   Super = 'super',
-  Bionalist = 'bionalist',
-  Administrativessistant = 'administrative-assistant',
-  Patient = 'patient',
-  LaboratoryAssistant = 'laboratory-assistant',
+  SalesAdvisor = 'sales-advisor',
   Manager = 'manager',
+  WarehouseManager = 'warehouse-manager',
 }
 
 export const USER_ROLES = [
@@ -13,32 +12,23 @@ export const USER_ROLES = [
     value: UserRole.Super,
   },
   {
-    name: 'Gerente',
+    name: 'Gerente General',
     value: UserRole.Manager,
   },
   {
-    name: 'Bionalista',
-    value: UserRole.Bionalist,
+    name: 'Asesor de Ventas',
+    value: UserRole.SalesAdvisor,
   },
   {
-    name: 'Asistente administrativo',
-    value: UserRole.Administrativessistant,
+    name: 'Gerente de Operaciones',
+    value: UserRole.WarehouseManager,
   },
-  {
-    name: 'Paciente',
-    value: UserRole.Patient,
-  },
-  {
-    name: 'Auxiliar de laboratorio',
-    value: UserRole.LaboratoryAssistant,
-  }
 ];
+
 
 export const USER_ROLES_VALUE: { [key: string]: { name: string; value: UserRole} } = {
   [UserRole.Super]: USER_ROLES[0],
   [UserRole.Manager]: USER_ROLES[1],
-  [UserRole.Bionalist]: USER_ROLES[2],
-  [UserRole.Administrativessistant]: USER_ROLES[3],
-  [UserRole.Patient]: USER_ROLES[4],
-  [UserRole.LaboratoryAssistant]: USER_ROLES[5],
+  [UserRole.SalesAdvisor]: USER_ROLES[2],
+  [UserRole.WarehouseManager]: USER_ROLES[3],
 };

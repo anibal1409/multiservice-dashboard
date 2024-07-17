@@ -1,6 +1,6 @@
 /**
- * Laboratory
- * The Laboratory-API description
+ * MI PROFE
+ * The MI PROFE-API description
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -19,6 +19,5 @@ export interface LoginUserResponseDto {
     idDocument: string;
     role: string;
     loginStamp: number;
-    patient: object;
 }
 

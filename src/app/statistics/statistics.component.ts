@@ -25,10 +25,11 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   sub$ = new Subscription();
   loading = false;  
   statistics: StatisticsCountersVM = {
-    exams: 0,
-    patients: 0,
-    studies: 0,
+    products: 0,
+    customers: 0,
+    sales: 0,
     users: 0,
+    orders: 0,
   };
   genders: Array<CharVM> = [];
   exams: Array<CharVM> = [];
@@ -84,6 +85,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       value: 11,
     },
   ];
+  showGraphs = false;
   
   constructor(
     private entityService: StatisticsService,
@@ -125,9 +127,9 @@ export class StatisticsComponent implements OnInit, OnDestroy {
         start: startMonth,
         end: endMonth,
       }).subscribe((statistics) => {
-        this.exams = statistics.exams;
-        this.genders = statistics.gender;
-        this.typesExam = statistics.typesExam;        
+        this.exams = statistics.products;
+        this.typesExam = statistics.categories;  
+        this.showGraphs = !!statistics.categories?.length && !!statistics.products?.length;         
       })
     );
   }

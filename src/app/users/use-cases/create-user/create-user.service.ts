@@ -32,7 +32,6 @@ export class CreateUserService
         idDocument: entitySave.idDocument,
         role: entitySave.role,
         status: entitySave.status,
-        patient: {id: entitySave.patientId},
       }
       )
       .pipe(

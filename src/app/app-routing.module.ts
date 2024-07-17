@@ -5,6 +5,11 @@ import {
   Routes,
 } from '@angular/router';
 
+import {
+  AuthGuard,
+  AuthLoginGuard,
+} from './auth';
+
 export const routes: Routes = [
 	{
 		path: '',
@@ -15,12 +20,12 @@ export const routes: Routes = [
     path: 'dashboard',
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-    // canActivate: [AuthLoginGuard],
+    canActivate: [AuthLoginGuard],
   },
   { path: '**', redirectTo: 'auth', pathMatch: 'full' },
 ];

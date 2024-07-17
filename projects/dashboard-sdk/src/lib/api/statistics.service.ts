@@ -1,6 +1,6 @@
 /**
- * Laboratory
- * The Laboratory-API description
+ * MI PROFE
+ * The MI PROFE-API description
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -34,7 +34,7 @@ import { Configuration }                                     from '../configurat
 })
 export class StatisticsService {
 
-    protected basePath = 'http://localhost';
+    protected basePath = 'http://api';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

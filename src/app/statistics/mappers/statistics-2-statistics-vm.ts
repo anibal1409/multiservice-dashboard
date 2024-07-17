@@ -2,9 +2,10 @@ import { StatisticsCountersVM } from '../models/statistics-vm';
 
 export function statistics2StatisticsVM(statistics: any): StatisticsCountersVM {
   return {
-    exams: statistics.exams,
-    patients: statistics.patients,
-    studies: statistics.studies,
+    products: statistics.products,
+    customers: statistics.customers,
+    sales: statistics.sales,
     users: statistics.users,
+    orders: statistics.orders,
   };
 }
