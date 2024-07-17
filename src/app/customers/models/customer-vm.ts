@@ -1,9 +1,9 @@
 export interface CustomerVM { 
   id?: number; 
-  firstName: string; 
-  lastName: string;
+  name: string; 
+  type: string;
   idDocument: string; 
   phone: string; 
-  gender: string;
+  email: string;
   status: boolean;
 } 

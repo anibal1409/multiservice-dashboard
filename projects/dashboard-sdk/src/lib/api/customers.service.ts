@@ -1,6 +1,6 @@
 /**
- * MI PROFE
- * The MI PROFE-API description
+ * KTM
+ * The KTM-API description
  *
  * The version of the OpenAPI document: 1.0
  * 

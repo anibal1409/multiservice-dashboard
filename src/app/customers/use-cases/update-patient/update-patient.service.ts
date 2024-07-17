@@ -29,12 +29,12 @@ export class UpdatePatientService
       .customersControllerUpdate(
         entitySave.id?.toString() || '0',
         {
-          firstName: entitySave.firstName,
-          lastName: entitySave.lastName,
+          name: entitySave.name,
+          type: entitySave.type,
           idDocument: entitySave.idDocument,
           status: entitySave.status,
           phone: entitySave.phone,
-          gender: entitySave.gender,
+          email: entitySave.email,
         }
       )
       .pipe(

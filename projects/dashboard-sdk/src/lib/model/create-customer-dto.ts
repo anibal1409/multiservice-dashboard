@@ -1,6 +1,6 @@
 /**
- * MI PROFE
- * The MI PROFE-API description
+ * KTM
+ * The KTM-API description
  *
  * The version of the OpenAPI document: 1.0
  * 
@@ -13,10 +13,10 @@
 
 export interface CreateCustomerDto { 
     idDocument: string;
-    firstName: string;
-    lastName: string;
+    name: string;
     status: boolean;
     phone: string;
-    gender: string;
+    type: string;
+    email: string;
 }
 

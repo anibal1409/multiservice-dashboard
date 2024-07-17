@@ -33,6 +33,11 @@ export class PatientsComponent implements OnInit, OnDestroy {
         cell: (element: { [key: string]: string }) => `${element['idDocument']}`,
       },
       {
+        columnDef: 'type',
+        header: 'Tipo',
+        cell: (element: { [key: string]: string }) => `${element['typeText']}`,
+      },
+      {
         columnDef: 'name',
         header: 'Nombre',
         cell: (element: { [key: string]: string }) => `${element['name']}`,

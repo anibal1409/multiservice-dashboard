@@ -40,6 +40,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       title: 'Productos',
     },
     {
+      path: '/dashboard/services',
+      title: 'Servicios',
+    },
+    {
       path: '/dashboard/sales',
       title: 'Ventas',
     },

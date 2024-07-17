@@ -41,9 +41,9 @@ export class FormComponent implements OnInit, OnDestroy {
     idDocument: '',
     status: true,
     id: 0,
-    firstName: '',
-    lastName: '',
-    gender: '',
+    name: '',
+    type: '',
+    email: '',
     phone: '',
   };
 
