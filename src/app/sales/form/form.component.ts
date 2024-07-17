@@ -207,7 +207,7 @@ export class FormComponent implements OnInit, OnDestroy {
       customerName: [{ value: '', disabled: true }],
 
       date: [new Date(), [Validators.required]],
-      stage: [StageSale.Pending, [Validators.required]],
+      stage: [StageSale.Paid, [Validators.required]],
       id: [0],
 
       total: [{ value: 0, disabled: true }, [Validators.required]],

@@ -12,13 +12,13 @@ export const MENU: Array<optionMenu> = [
     name: 'Productos',
     value: 'products',
     icon: 'widgets',
-    permissions: [UserRole.Super, UserRole.Manager, UserRole.WarehouseManager],
+    permissions: [UserRole.Super, UserRole.Manager, UserRole.WarehouseManager, UserRole.SalesAdvisor],
   },
   {
     name: 'Servicios',
     value: 'services',
     icon: 'layers',
-    permissions: [UserRole.Super, UserRole.Manager, UserRole.WarehouseManager],
+    permissions: [UserRole.Super, UserRole.Manager, UserRole.WarehouseManager, UserRole.SalesAdvisor],
   },
   {
     name: 'Pedidos',
