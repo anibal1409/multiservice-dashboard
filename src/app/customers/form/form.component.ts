@@ -17,6 +17,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { isEqual } from 'lodash';
 import { Subscription } from 'rxjs';
 
+import { CustomerType } from '../models';
 import { CustomerVM } from '../models/customer-vm';
 import { PatientsService } from '../patients.service';
 
@@ -42,7 +43,7 @@ export class FormComponent implements OnInit, OnDestroy {
     status: true,
     id: 0,
     name: '',
-    type: '',
+    type: CustomerType.NaturalPerson,
     email: '',
     phone: '',
   };
@@ -52,7 +53,7 @@ export class FormComponent implements OnInit, OnDestroy {
     { name: 'Inactivo', value: false, },
   ];
 
-  genders = ['Femenino', 'Masculino'];
+  CustomerType = CustomerType;
 
   constructor(
     private usersService: PatientsService,
@@ -106,9 +107,9 @@ export class FormComponent implements OnInit, OnDestroy {
       idDocument: [null, [Validators.required]],
       id: [0],
       status: [true, [Validators.required]],
-      firstName: [null, [Validators.required]],
-      lastName: [null, [Validators.required]],
-      gender: [null, [Validators.required]],
+      name: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
+      type: [CustomerType.NaturalPerson, [Validators.required]],
       phone: [null, [Validators.required]],
     });
 

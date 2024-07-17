@@ -14,6 +14,10 @@
 </div>
 
 <form mat-dialog-content [formGroup]="form!">
+  <mat-button-toggle-group class="mb-4" name="type" aria-label="Tipo de cliente" formControlName="type">
+    <mat-button-toggle [value]="CustomerType.NaturalPerson">Persona Natural</mat-button-toggle>
+    <mat-button-toggle [value]="CustomerType.LegalPerson">Persona Jurídica</mat-button-toggle>
+  </mat-button-toggle-group>
   <mat-form-field>
     <mat-label>Documento de identidad</mat-label>
     <input
@@ -29,34 +33,34 @@
     >
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Nombre(s)</mat-label>
+    <mat-label>Nombre</mat-label>
     <input
       matInput
       type="text"
-      name="firstName"
-      id="firstName"
-      formControlName="firstName"
+      name="name"
+      id="name"
+      formControlName="name"
       required
     />
     <mat-error
-      *ngIf="form.controls['firstName'].hasError('required')"
+      *ngIf="form.controls['name'].hasError('required')"
       >Campo requerido</mat-error
     >
   </mat-form-field>
 
 
   <mat-form-field>
-    <mat-label>Apellido(s)</mat-label>
+    <mat-label>Email</mat-label>
     <input
       matInput
-      type="text"
-      name="lastName"
-      id="lastName"
-      formControlName="lastName"
+      type="email"
+      name="email"
+      id="email"
+      formControlName="email"
       required
     />
     <mat-error
-      *ngIf="form.controls['lastName'].hasError('required')"
+      *ngIf="form.controls['email'].hasError('required')"
       >Campo requerido</mat-error
     >
   </mat-form-field>
@@ -76,24 +80,6 @@
       *ngIf="form.controls['phone'].hasError('required')"
       >Campo requerido</mat-error
     >
-  </mat-form-field>
-  
-  <mat-form-field>
-    <mat-label>Genero</mat-label>
-    <mat-select
-      name="gender"
-      formControlName="gender"
-      matSelect
-      placeholder="Genero"
-    >
-      <mat-option
-        *ngFor="let gender of genders"
-        [value]="gender"
-      >
-        {{ gender }}
-      </mat-option
-      >
-    </mat-select>
   </mat-form-field>
   
   <mat-form-field>
