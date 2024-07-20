@@ -4,4 +4,5 @@ export interface StatisticsCountersVM {
   sales: number;
   products: number;
   orders: number;
+  services: number;
 }

@@ -17,5 +17,6 @@ export interface CountersRespondeDto {
     sales: number;
     products: number;
     orders: number;
+    services: number;
 }
 

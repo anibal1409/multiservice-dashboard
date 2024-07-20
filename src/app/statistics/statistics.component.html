@@ -24,10 +24,21 @@
 
   <mat-card>
     <mat-card-header class="p-3">
-      <mat-card-title>Productos ofrecidos</mat-card-title>
+      <mat-card-title>Productos disponibles</mat-card-title>
       <mat-card-subtitle>
         {{
           statistics.products
+        }}
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header class="p-3">
+      <mat-card-title>Servicios disponibles</mat-card-title>
+      <mat-card-subtitle>
+        {{
+          statistics.services
         }}
       </mat-card-subtitle>
     </mat-card-header>
@@ -60,11 +71,11 @@
         <mat-card-title>Categorías más vendidas</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <ngx-charts-pie-chart
-          [results]="typesExam"
-          [labels]="true"
-          [view]="[0, 400]"
-        ></ngx-charts-pie-chart>
+        <ngx-charts-pie-grid
+        [results]="typesExam"
+        [view]="[0, 400]"
+        >
+        </ngx-charts-pie-grid>
       </mat-card-content>
     </mat-card>
     
@@ -73,16 +84,36 @@
         <mat-card-title>Productos más vendidos</mat-card-title>
       </mat-card-header>
       <mat-card-content>
+
         <ngx-charts-bar-vertical
           [results]="exams"
           [xAxisLabel]="'Productos'"
-          [yAxisLabel]="''"
+          [yAxisLabel]="'Vendido'"
           [showXAxisLabel]="true"
           [showYAxisLabel]="true"
           [xAxis]="true"
           [yAxis]="true"
           [view]="[0, 400]"
         ></ngx-charts-bar-vertical>
+      </mat-card-content>
+    </mat-card>
+
+
+    <mat-card class="content-statistics">
+      <mat-card-header>
+        <mat-card-title>Servicios más vendidos</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ngx-charts-bar-horizontal
+          [results]="services"
+          [xAxisLabel]="'Servicios'"
+          [yAxisLabel]="'Vendido'"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxis]="true"
+          [yAxis]="true"
+          [view]="[0, 400]"
+        ></ngx-charts-bar-horizontal>
       </mat-card-content>
     </mat-card>
   </ng-container>

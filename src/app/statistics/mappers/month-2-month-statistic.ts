@@ -7,6 +7,7 @@ export function month2MonthStaticti(month: any): MonthStatistics {
   return {
     products: month.products.map((product: any) => toCharVM(product.productName, product.count, product.productName.substr(0, 2))),
     categories: month.categories.map((category: any) => toCharVM(category.category, category.count, category.category.substr(0, 2))),
+    services: month.services.map((service: any) => toCharVM(service.serviceName, service.count, service.serviceName.substr(0, 2)))
   };
 }
 

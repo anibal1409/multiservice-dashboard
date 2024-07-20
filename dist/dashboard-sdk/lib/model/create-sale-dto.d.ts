@@ -18,6 +18,6 @@ export interface CreateSaleDto {
     stage: string;
     total: number;
     customer: IdCreateEntity;
-    saleProducts: Array<CreateSaleProductDto>;
-    saleServices: Array<CreateSaleServiceDto>;
+    saleProducts?: Array<CreateSaleProductDto>;
+    saleServices?: Array<CreateSaleServiceDto>;
 }

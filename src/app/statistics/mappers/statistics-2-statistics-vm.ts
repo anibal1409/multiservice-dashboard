@@ -7,5 +7,6 @@ export function statistics2StatisticsVM(statistics: any): StatisticsCountersVM {
     sales: statistics.sales,
     users: statistics.users,
     orders: statistics.orders,
+    services: statistics.services,
   };
 }

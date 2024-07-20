@@ -30,10 +30,12 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     sales: 0,
     users: 0,
     orders: 0,
+    services: 0,
   };
   genders: Array<CharVM> = [];
   exams: Array<CharVM> = [];
   typesExam: Array<CharVM> = [];
+  services: Array<CharVM> = [];
   ctrlMonth = new FormControl();
   months: Array<{name: string; value: number}> = [
     {
@@ -127,8 +129,11 @@ export class StatisticsComponent implements OnInit, OnDestroy {
         start: startMonth,
         end: endMonth,
       }).subscribe((statistics) => {
+        console.log(statistics);
+        
         this.exams = statistics.products;
         this.typesExam = statistics.categories;  
+        this.services = statistics.services;
         this.showGraphs = !!statistics.categories?.length && !!statistics.products?.length;         
       })
     );

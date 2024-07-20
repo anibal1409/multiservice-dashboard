@@ -1,6 +1,7 @@
 export interface MonthStatistics {
   categories: Array<CharVM>;
   products: Array<CharVM>;
+  services: Array<CharVM>;
 }
 
 export interface GenderMonth {

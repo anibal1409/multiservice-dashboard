@@ -12,4 +12,5 @@
 export interface MonthRespondeDto {
     categories: object;
     products: object;
+    services: object;
 }

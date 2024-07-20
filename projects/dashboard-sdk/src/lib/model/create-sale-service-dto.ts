@@ -14,8 +14,8 @@ import { IdCreateEntity } from './id-create-entity';
 
 export interface CreateSaleServiceDto { 
     id?: number;
-    amount: string;
-    price: string;
+    amount: number;
+    price: number;
     subtotal: number;
     service: IdCreateEntity;
 }

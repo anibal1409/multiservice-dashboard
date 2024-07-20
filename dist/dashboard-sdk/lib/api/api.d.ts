@@ -18,4 +18,4 @@ export * from './statistics.service';
 import { StatisticsService } from './statistics.service';
 export * from './users.service';
 import { UsersService } from './users.service';
-export declare const APIS: (typeof SaleService | typeof AuthService | typeof CategoriesService | typeof CustomersService | typeof DefaultService | typeof OrdersService | typeof ProductsService | typeof ServicesService | typeof StatisticsService | typeof UsersService)[];
+export declare const APIS: (typeof StatisticsService | typeof AuthService | typeof CategoriesService | typeof CustomersService | typeof DefaultService | typeof OrdersService | typeof ProductsService | typeof SaleService | typeof ServicesService | typeof UsersService)[];
