@@ -1,0 +1,12 @@
+export * from './api';
+export * from './auth.service';
+export * from './categories.service';
+export * from './customers.service';
+export * from './default.service';
+export * from './orders.service';
+export * from './products.service';
+export * from './sale.service';
+export * from './services.service';
+export * from './statistics.service';
+export * from './users.service';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9wcm9qZWN0cy9kYXNoYm9hcmQtc2RrL3NyYy9saWIvYXBpL2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWMsT0FBTyxDQUFDO0FBQ3RCLGNBQWMsZ0JBQWdCLENBQUM7QUFDL0IsY0FBYyxzQkFBc0IsQ0FBQztBQUNyQyxjQUFjLHFCQUFxQixDQUFDO0FBQ3BDLGNBQWMsbUJBQW1CLENBQUM7QUFDbEMsY0FBYyxrQkFBa0IsQ0FBQztBQUNqQyxjQUFjLG9CQUFvQixDQUFDO0FBQ25DLGNBQWMsZ0JBQWdCLENBQUM7QUFDL0IsY0FBYyxvQkFBb0IsQ0FBQztBQUNuQyxjQUFjLHNCQUFzQixDQUFDO0FBQ3JDLGNBQWMsaUJBQWlCLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgKiBmcm9tICcuL2FwaSc7XG5leHBvcnQgKiBmcm9tICcuL2F1dGguc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL2NhdGVnb3JpZXMuc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL2N1c3RvbWVycy5zZXJ2aWNlJztcbmV4cG9ydCAqIGZyb20gJy4vZGVmYXVsdC5zZXJ2aWNlJztcbmV4cG9ydCAqIGZyb20gJy4vb3JkZXJzLnNlcnZpY2UnO1xuZXhwb3J0ICogZnJvbSAnLi9wcm9kdWN0cy5zZXJ2aWNlJztcbmV4cG9ydCAqIGZyb20gJy4vc2FsZS5zZXJ2aWNlJztcbmV4cG9ydCAqIGZyb20gJy4vc2VydmljZXMuc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL3N0YXRpc3RpY3Muc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL3VzZXJzLnNlcnZpY2UnO1xuIl19

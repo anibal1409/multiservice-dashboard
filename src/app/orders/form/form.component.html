@@ -47,6 +47,7 @@
           <mat-option
             *ngFor="let stage of stagesStudy"
             [value]="stage.value"
+            [disabled]="stage.disabled"
           >
             {{ stage.name }}
           </mat-option

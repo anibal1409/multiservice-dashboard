@@ -30,7 +30,8 @@ import {
   OrderVM,
 } from '../models';
 import {
-  STAGE_SALE,
+  STAGE_ORDER,
+  STAGE_ORDER_VALUE,
   StageOrder,
 } from '../models/stage';
 import { OrdersService } from '../orders.service';
@@ -61,7 +62,7 @@ export class FormComponent implements OnInit, OnDestroy {
     note: '',
   };
 
-  stagesStudy = STAGE_SALE;
+  stagesStudy = STAGE_ORDER;
 
   optionsCurrency = CustomCurrencyMaskConfig;
 
@@ -124,44 +125,56 @@ export class FormComponent implements OnInit, OnDestroy {
         this.entityService
           .find$({ id: this.id })
           .subscribe((entity) => {
-            console.log(entity);
-            if (entity && !this.oldFormValue.id) {
-              this.oldFormValue = {
-                date: entity.date,
-                deadline: entity.deadline,
-                provider: entity.provider,
-                stage: entity.stage,
-                id: entity.id,
-
-                total: entity.total,
-                orderProducts: entity.orderProducts?.map(
-                  (saleProduct) => {
-                    return {
-                      id: saleProduct.id,
-                      productId: saleProduct.product?.id,
-                      amount: saleProduct.amount,
-                      name: saleProduct.product?.name,
-                      price: saleProduct.price,
-                      subtotal: saleProduct.subtotal,
-                    };
+            try {
+              console.log(entity);
+              if (entity && !this.oldFormValue.id) {
+                this.oldFormValue = {
+                  date: entity.date,
+                  deadline: entity.deadline,
+                  provider: entity.provider,
+                  stage: entity.stage,
+                  id: entity.id,
+  
+                  total: entity.total,
+                  orderProducts: entity.orderProducts?.map(
+                    (saleProduct) => {
+                      return {
+                        id: saleProduct.id,
+                        productId: saleProduct.product?.id,
+                        amount: saleProduct.amount,
+                        name: saleProduct.product?.name,
+                        price: saleProduct.price,
+                        subtotal: saleProduct.subtotal,
+                      };
+                    }
+                  ),
+                } as any;
+                const stage = STAGE_ORDER_VALUE[entity.stage];
+                this.stagesStudy = STAGE_ORDER.map((stageOrder) => {
+                  return {
+                    ...stageOrder,
+                    disabled: entity.stage ===  StageOrder.Cancelled || stageOrder.order < stage.order,
                   }
-                ),
-              } as any;
-              this.form.patchValue(
-                {
-                  ...this.oldFormValue,
-                },
-                {
-                  emitEvent: false,
+                });
+                this.form.patchValue(
+                  {
+                    ...this.oldFormValue,
+                  },
+                  {
+                    emitEvent: false,
+                  }
+                );
+                this.updateShowPrint();
+                if (entity?.orderProducts?.length) {
+                  for (const saleProduct of entity.orderProducts) {
+                    this.addProduct(saleProduct);
+                  }
                 }
-              );
-              this.updateShowPrint();
-              if (entity?.orderProducts?.length) {
-                for (const saleProduct of entity.orderProducts) {
-                  this.addProduct(saleProduct);
-                }
+                this.updateProductValue();
               }
-              this.updateProductValue();
+            } catch (error) {
+              console.log(error);
+              
             }
           })
       );
@@ -196,7 +209,7 @@ export class FormComponent implements OnInit, OnDestroy {
     );
 
     this.sub$.add(
-      this.form.get('stage')?.valueChanges.subscribe(
+      this.form?.get('stage')?.valueChanges.subscribe(
         () => {
           this.updateProductValue();
         }
@@ -205,29 +218,35 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   private updateProductValue(): void {
-    const stage = this.form.get('stage')?.value;
-    this.hiddenFooter = this.shoHiddenAccept.includes(stage) && this.submitDisabled;
-    this.showDelete = this.showValuesAccept.includes(stage);
-    const disabled = !this.showValuesAccept.includes(stage);
-    const formArray = this.orderProductsArray;
-    for (let i = 0; i < formArray.length; i++) {
-      if (disabled) {
-        formArray.at(i).get('price')?.disable({emitEvent: false});
-        formArray.at(i).get('amount')?.disable({emitEvent: false});
+    if (this.id) {
+      const stage = this.form?.get('stage')?.value;
+      this.hiddenFooter = this.shoHiddenAccept.includes(stage) && this.submitDisabled;
+      this.showDelete = this.showValuesAccept.includes(stage);
+      const disabled = !this.showValuesAccept.includes(stage);
+      const formArray = this.orderProductsArray;
+      for (let i = 0; i < formArray.length; i++) {
+        if (disabled) {
+          formArray.at(i)?.get('price')?.disable({emitEvent: false});
+          formArray.at(i)?.get('amount')?.disable({emitEvent: false});
+        } else {
+          formArray.at(i)?.get('price')?.enable({emitEvent: false});
+          formArray.at(i)?.get('amount')?.enable({emitEvent: false});
+        }
+      }
+      if (!this.showValuesAccept.includes(stage)) {
+        this.form.disable({ emitEvent: false });
+        this.formDisabled = true;
+        if (stage !== StageOrder.Completed || !this.submitDisabled) {
+          this.form?.get('stage')?.enable({emitEvent: false});
+        }
       } else {
-        formArray.at(i).get('price')?.enable({emitEvent: false});
-        formArray.at(i).get('amount')?.enable({emitEvent: false});
+        this.form?.get('provider')?.enable({emitEvent: false});
+        this.form?.get('date')?.enable({emitEvent: false});
+        this.form?.get('stage')?.enable({emitEvent: false});
+        this.form?.get('deadline')?.enable({emitEvent: false});
+        this.form?.get('note')?.enable({emitEvent: false});
+        this.formDisabled = false;
       }
-    }
-    if (!this.showValuesAccept.includes(stage)) {
-      this.form.disable({ emitEvent: false });
-      this.formDisabled = true;
-      if (stage !== StageOrder.Completed || !this.submitDisabled) {
-        this.form.get('stage')?.enable({emitEvent: false});
-      }
-    } else {
-      this.form.enable({ emitEvent: false });
-      this.formDisabled = false;
     }
   }
 

@@ -1,4 +1,7 @@
 import {
+  AfterContentChecked,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Inject,
@@ -24,9 +27,11 @@ import { PatientsService } from '../patients.service';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
+
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormComponent implements OnInit, OnDestroy {
+export class FormComponent implements OnInit, OnDestroy, AfterContentChecked {
   @Input()
   id!: number;
 
@@ -59,10 +64,16 @@ export class FormComponent implements OnInit, OnDestroy {
     private usersService: PatientsService,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: CustomerVM,
+    private cdref: ChangeDetectorRef,
   ) { }
 
   ngOnDestroy(): void {
     this.sub$.unsubscribe();
+  }
+
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
   }
 
   ngOnInit(): void {
@@ -92,6 +103,8 @@ export class FormComponent implements OnInit, OnDestroy {
                   emitEvent: false,
                 }
               );
+
+              this.cdref.detectChanges();
             }
           })
       );

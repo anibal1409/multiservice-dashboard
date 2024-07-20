@@ -52,7 +52,7 @@ export class ErrorHandlerService implements ErrorHandler {
     if (
       parsedError.source === ErrorSource.Server ||
       (this.config.alertClientErrors &&
-        parsedError.source === ErrorSource.Client)
+        parsedError.source === ErrorSource.Client && parsedError?.error?.code !== -100)
     ) {
       this.alertSevice[this.alertMethodName](message);
     }

@@ -6,7 +6,7 @@ import {
   OrderVM,
 } from '../models';
 import {
-  STAGE_STUDY_VALUE,
+  STAGE_ORDER_VALUE,
   STAGES_ACTIVES,
 } from '../models/stage';
 import { order2OrderVM } from './order-2-order-vm';
@@ -16,7 +16,7 @@ export function order2OrderItemVM(order: any): OrderItemVM {
   return { 
     ...orderVM,
     counterProducts: orderVM?.orderProducts?.reduce((accumulator: number, currentValue: OrderProduct) => accumulator + +currentValue.amount, 0,) || 0,
-    stageText: STAGE_STUDY_VALUE[order?.stage]?.name,
+    stageText: STAGE_ORDER_VALUE[order?.stage]?.name,
     statusText: order?.status ? 'Activo' : 'Inactivo',
     options: { 
       options: STAGES_ACTIVES.includes(order?.stage) ? ORDER_EDIT : ORDER_NOT_EDIT ,

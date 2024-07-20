@@ -1,8 +1,9 @@
 import { ProductVM } from '../../products';
+import { StageOrder } from './stage';
 
 export interface OrderVM {
   id?: number;
-  stage: string;
+  stage: StageOrder;
   date: string;
   deadline?: string;
   note?: string;

@@ -17,7 +17,7 @@ import {
   searchCallback,
   StateService,
 } from '../../common';
-import { STAGE_SALE } from '../models/stage';
+import { STAGE_ORDER } from '../models/stage';
 import { OrdersService } from '../orders.service';
 
 @Component({
@@ -40,7 +40,7 @@ export class ReportComponent  implements OnInit, OnDestroy {
       value: null,
       disabled: false,
     } as any,
-    ...STAGE_SALE
+    ...STAGE_ORDER
   ];
 
   private sub$ = new Subscription();

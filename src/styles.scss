@@ -378,3 +378,7 @@ app-card-subject-schedules.danger > mat-card {
   align-items: center;
   padding: 8rem;
 }
+
+.mdc-text-field--filled .mdc-floating-label, .mdc-text-field--filled .mdc-floating-label--float-above {
+  color: var(--mdc-filled-text-field-label-text-color) !important;
+}

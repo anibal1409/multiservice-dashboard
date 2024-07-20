@@ -183,7 +183,7 @@ export class FormComponent implements OnInit, OnDestroy {
                   ...stageSale,
                   disabled: entity.stage ===  StageSale.Cancelled || stageSale.order < stage.order,
                 }
-              })
+              });
               this.form.patchValue(
                 {
                   ...this.oldFormValue,

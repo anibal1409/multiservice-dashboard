@@ -6,6 +6,12 @@
     width: 100%;
   }
 
+  mat-form-field {
+    input {
+      color: var(--mdc-filled-text-field-input-text-color) !important;
+    }
+  }
+
 
   .content-exams {
     display: flex;
