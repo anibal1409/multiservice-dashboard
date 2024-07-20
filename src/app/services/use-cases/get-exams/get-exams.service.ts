@@ -23,8 +23,11 @@ export class GetServicesService implements UseCase<Array<ServiceItemVM> | null, 
     private memoryService: ServiceMemoryService,
   ) {}
 
-  exec(): Observable<Array<ServiceItemVM>> {
-    return this.httpService.servicesControllerFindAll()
+  exec(data: BaseQuery = {}): Observable<Array<ServiceItemVM>> {
+    return this.httpService.servicesControllerFindAll(
+      data?.id,
+      data?.status,
+    )
     .pipe(
       map((items: any) => items.map(serviceToServiceItemVM)),
       tap((items) => {

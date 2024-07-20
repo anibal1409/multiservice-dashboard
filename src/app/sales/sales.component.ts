@@ -103,6 +103,7 @@ export class SalesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub$.unsubscribe();
+    this.entityService.closed();
   }
   
   clickAction(option: OptionAction) {
@@ -116,6 +117,9 @@ export class SalesComponent implements OnInit, OnDestroy {
         break;
       case RowActionSale.delete:
         this.showConfirm(option.data as any);
+        break;
+      case RowActionSale.print:
+        this.printSale(option.data as any);
         break;
     }
   }
@@ -142,5 +146,9 @@ export class SalesComponent implements OnInit, OnDestroy {
 
   goReport(): void {
     this.router.navigate(['/dashboard/sales/report']);
+  }
+
+  printSale(item: SaleItemVM): void {
+    this.entityService.printSale(item.id || 0);
   }
 }

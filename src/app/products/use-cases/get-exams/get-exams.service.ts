@@ -23,8 +23,11 @@ export class GetExamsService implements UseCase<Array<ProductItemVM> | null, Bas
     private memoryService: ExamMemoryService,
   ) {}
 
-  exec(): Observable<Array<ProductItemVM>> {
-    return this.httpService.productsControllerFindAll()
+  exec(data: BaseQuery = {}): Observable<Array<ProductItemVM>> {
+    return this.httpService.productsControllerFindAll(
+      data?.id,
+      data?.status,
+    )
     .pipe(
       map((items: any) => items.map(examToExamItemVM)),
       tap((items) => {

@@ -18,6 +18,7 @@
           (keyup.enter)="findPatient()"
         />
         <mat-icon matSuffix (click)="findPatient()">search</mat-icon>
+        <mat-icon matSuffix (click)="addCustomer()">add</mat-icon>
         <mat-error *ngIf="form.controls['customerDocument'].hasError('required')"
           >Campo requerido</mat-error
         >
@@ -64,6 +65,7 @@
           <mat-option
             *ngFor="let stage of stagesStudy"
             [value]="stage.value"
+            [disabled]="stage.disabled"
           >
             {{ stage.name }}
           </mat-option

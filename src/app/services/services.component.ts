@@ -46,7 +46,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
       {
         columnDef: 'status',
         header: 'Estado',
-        cell: (element: { [key: string]: string }) => `${element['status']}`,
+        cell: (element: { [key: string]: string }) => `${element['statusText']}`,
       },
     ],
     body: [],
