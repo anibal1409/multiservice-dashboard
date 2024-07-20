@@ -506,7 +506,13 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   generateReportSale(): void {
-    this.entityService.printSale(this.id);
+    this.sub$.add(
+      this.entityService.printSale(this.id).subscribe(
+        (report) => {
+          this.entityService.openPDF(report);
+        }
+      )
+    );
   }
 
   addCustomer(): void {

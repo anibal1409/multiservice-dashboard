@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import {
   finalize,
   Observable,
-  Subscription,
 } from 'rxjs';
 
 import { ListComponentService } from '../common/memory-repository';
@@ -29,7 +28,7 @@ import {
 
 @Injectable()
 export class SalesService extends ListComponentService<SaleItemVM, SaleBaseQuery> {
-  sub$ = new Subscription();
+
   constructor(
     public getEntityService: GetStudiesService,
     public memoryEntityService: SaleMemoryService,
@@ -88,25 +87,17 @@ export class SalesService extends ListComponentService<SaleItemVM, SaleBaseQuery
     );
   }
 
-  printSale(id: number): void {
-    this.sub$.add(
-      this.generateReportSale({
-        id
-      }).subscribe(
-        (report) => {
-          console.log(report);
-          const link = document.createElement('a');
-          link.href = report?.reportUrl;
-          link.target = '_black';
-          link.download = report?.name;
-          link.click();
-          
-        }
-      )
-    );
+  printSale(id: number): Observable<any> {
+    return this.generateReportSale({
+      id
+    });
   }
 
-  closed(): void {
-    this.sub$.unsubscribe();
+  openPDF(report: any): void {
+    const link = document.createElement('a');
+    link.href = report?.reportUrl;
+    link.target = '_black';
+    link.download = report?.name;
+    link.click();
   }
 }
