@@ -37,7 +37,7 @@ export class ReportComponent  implements OnInit, OnDestroy {
   stagesStudy = [
     {
       name: 'Todos',
-      value: null,
+      value: -1,
       disabled: false,
     } as any,
     ...STAGE_SALE
@@ -70,8 +70,7 @@ export class ReportComponent  implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       start: [null, [Validators.required]],
       end: [null, [Validators.required]],
-      // stage: [null, [Validators.required]],
-      stage: [null],
+      stage: [-1],
     });
 
     this.sub$.add(
@@ -92,6 +91,7 @@ export class ReportComponent  implements OnInit, OnDestroy {
         this.salesService
           .generateReportSales({
             ...values,
+            stage: values.stage === -1 ? null : values.stage,
           })
           .subscribe((src) => {
             this.pdfSrc = src?.reportUrl;
