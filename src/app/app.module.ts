@@ -1,4 +1,5 @@
 import { registerLocaleData } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import es from '@angular/common/locales/es';
 import {
   ErrorHandler,
@@ -42,6 +43,7 @@ import {
   AuthLoginGuard,
 } from './auth';
 import { AuthModule } from './auth/auth.module';
+import { HttpInterceptorInterceptor } from './common/http-interceptor';
 import { DashboardModule } from './dashboard';
 
 registerLocaleData(es);
@@ -99,6 +101,7 @@ const maskConfig: Partial<IConfig> = {
       provide: ErrorHandler,
       useExisting: forwardRef(() => ErrorHandlerService),
     },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
